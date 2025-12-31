@@ -24,13 +24,18 @@ resource "aws_security_group" "my_sg" {
 }
 
 resource "aws_instance" "web" {
-  ami                    = "ami-0c02fb55956c7d316"
+  ami                    = "ami-0fa91bc90632c73c9"
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.my_sg.id]
-  key_name               = "aws-key"
+  key_name               = "jenkin1-key"
+
+  root_block_device {
+    volume_size           = var.root_volume_size
+    volume_type           = "gp3"
+    delete_on_termination = true
+  }
 
   tags = {
     Name = "DevOps-EC2"
   }
 }
-

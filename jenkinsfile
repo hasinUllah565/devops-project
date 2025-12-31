@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone GitHub') {
+            steps {
+                git url:'https://github.com/hasinUllah565/devops-project.git' ,branch:"main"
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub', 
+                    usernameVariable: 'DOCKER_USER', 
+                    passwordVariable: 'DOCKER_PASS')]) {
+                    
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t devops-app .'
+            }
+        }
+
+        stage('Deploy App') {
+            steps {
+                sh 'docker-compose down -v'
+                sh 'docker-compose up -d'
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub', 
+                    usernameVariable: 'DOCKER_USER', 
+                    passwordVariable: 'DOCKER_PASS')]) {
+                    
+                    sh 'docker tag devops-app $DOCKER_USER/devops-app:latest'
+                    sh 'docker push $DOCKER_USER/devops-app:latest'
+                }
+            }
+        }
+    }
+}
+
