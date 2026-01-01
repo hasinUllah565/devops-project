@@ -87,55 +87,13 @@ provider "aws" {
 
 
 --->
-`sudo vim main.tf`
+2.`sudo vim main.tf`
 
 ![configure_terrafom](images/5.png)
 
 --->
 `sudo vim main.tf`
-`
-resource "aws_security_group" "my_sg" {
-  name = "web-sg"
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-`
-`
-resource "aws_instance" "web" {
-  ami                    = "ami-0c02fb55956c7d316"
-  instance_type          = var.instance_type
-  vpc_security_group_ids = [aws_security_group.my_sg.id]
-  key_name               = "aws-key"
-root_block_device {
-  volume_size = var.root_volume_size
-  volume_type = "gp3"
-  delete_on_termination = true
-}
-  tags = {
-    Name = "DevOps-EC2"
-  }
-}
-`
-
+![main.tf file](images/21.png)
 
 after creting this you need to run these commands 
 
@@ -214,7 +172,7 @@ _______________________________
 ![push-code-to-dockerhub](images/10.png)
 _________________________________
 
-# PART 5: JENKINS (CI/CD)
+# STEP 5: JENKINS (CI/CD)
 #connect your machine using ssh with your local
 
 # `ssh -i "jenkin1-key.pem" ubuntu@ec2IP`
@@ -303,9 +261,6 @@ pipeline {
 #after buidling your pipline it  `clone github code`-->`docker login`-->`docker build`-->`deploy app`-->`push to docker hub`
 ![pipeline build](images/19.png)
 
-
-# "Flask app successfully deployed on aws ec2 machine "
-![app deployed](images/20.png)
 _________________________________
 
 Terraform creates AWS EC2
