@@ -72,7 +72,7 @@ provider "aws" {
 --->
 `sudo vim variables.tf`
 variable "instance_type" {
-  default = "t2.micro"
+  default = "t3.micro"
 }
 
 variable "root_volume_size" {
@@ -174,7 +174,19 @@ CMD ["python", "app.py"]
 `docker run -d -p 80:80 devops-app`
 #check from browser
 http://localhost
-______________________________
+
+_______________
+
+# create docker-compose.yml file
+cat docker-compose.yml 
+services:
+  flask-app:
+    build: .
+    container_name: flask_app
+    ports:
+      - "5000:5000"
+    restart: always
+_______________________________
 
 `sudo cd ..`
 `sudo git init`
@@ -211,29 +223,60 @@ wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key 
 ![welcom-jenkins](images/12.png)
 
 #  Jenkinsfile (PIPELINE)
+# cat jenkinsfile 
 pipeline {
     agent any
 
     stages {
-        stage('Clone Repo') {
+        stage('Clone GitHub') {
             steps {
-                git url: 'https://github.com/hasinUllah565/devops-project.git', branch: 'main'
+                git url:'https://github.com/hasinUllah565/devops-project.git' ,branch:"main"
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub', 
+                    usernameVariable: 'DOCKER_USER', 
+                    passwordVariable: 'DOCKER_PASS')]) {
+                    
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                }
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t devops-app app/'
+                sh 'docker build -t devops-app .'
             }
         }
 
-        stage('Run Container') {
+        stage('Deploy App') {
             steps {
-                sh 'docker run -d -p 80:80 devops-app'
+                sh 'docker-compose down -v'
+                sh 'docker-compose up -d'
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub', 
+                    usernameVariable: 'DOCKER_USER', 
+                    passwordVariable: 'DOCKER_PASS')]) {
+                    
+                    sh 'docker tag devops-app $DOCKER_USER/devops-app:latest'
+                    sh 'docker push $DOCKER_USER/devops-app:latest'
+                }
             }
         }
     }
 }
+
+#click on build to build your pipline 
+#after buidling your pipline it  `clone github code`-->`docker login`-->`docker build`-->`deploy app`-->`push to docker hub`
+![pipeline build](images/19.png)
 
 _________________________________
 
