@@ -49,8 +49,8 @@ AdministratorAccess
 __________________________________
 
 # step 3: create  require files and dirs
-sudo mkdir devops-project
-cd devops-project
+1. `sudo mkdir devops-project`
+2. `cd devops-project`
 
 
 ![create file and dir require](images/4.png)
