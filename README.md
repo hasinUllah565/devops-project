@@ -39,9 +39,14 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashi
 ```
 
 #3:Update and install Terraform
-`sudo apt update && sudo apt install terraform`
 
-`terraform version`
+``
+sudo apt update && sudo apt install terraform
+``
+
+``
+terraform version
+``
 ________________________________________________
 
 # step 2: AWS SETUP
