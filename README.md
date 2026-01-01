@@ -211,13 +211,21 @@ services:
 _______________________________
 
 1.`sudo cd ..`
+
 2.`sudo git init`
+
 3.`sudo git add .`
+
 4.`sudo git commit -m "Initial DevOps project"`
+
 5.`sudo git branch -M main`
+
 6.`sudo git remote add origin https://github.com/hasinUllah565/devops-project.git`
+
 7.`git remote -v`
+
 8.`sudo git push -u origin main`
+
 ![push-code-to-dockerhub](images/9.png)
 
 ![push-code-to-dockerhub](images/10.png)
