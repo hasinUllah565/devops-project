@@ -2,9 +2,13 @@
 
 # PROJECT GOAL
 1.Create AWS infrastructure using Terraform
+
 2.Deploy a Dockerized application
+
 3.Automate deployment using Jenkins CI/CD
+
 4.Use GitHub as source control
+
 ![project-workflow](images/1.png)
 
 --------------------------------------------
