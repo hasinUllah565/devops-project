@@ -18,9 +18,9 @@ Terraform is a DevOps tool that allows you to create, manage, and update cloud i
 
 terafrom file extensio is "`.tf`"
 
-# Step 1: How to install terrafrom 
+#  Step 1: How to install terrafrom 
 
-# [Terraform Installation Guide](https://developer.hashicorp.com/terraform/downloads)
+# [Terraform Installation Guide link](https://developer.hashicorp.com/terraform/downloads)
 
 #1:Add HashiCorp GPG key
 This ensures that the packages are trusted and verified.
@@ -220,7 +220,9 @@ _________________________________
 # `ssh -i "jenkin1-key.pem" ubuntu@ec2IP`
 ![ssh-connect](images/17.png)
 
-##Install Jenkins on EC2 or local VM
+#  Install Jenkins on EC2 or local VM
+# [Jenkins Installation Guide link](https://www.jenkins.io/doc/book/installing/linux/)
+
 
 1.`sudo apt install -y openjdk-11-jdk`
 2.`wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
@@ -230,7 +232,7 @@ _________________________________
 
 4.`sudo apt install jenkins -y`
 
-5.[Jenkins Installation Guide](https://www.jenkins.io/doc/book/installing/linux/)
+
 
 
 ##http://EC2-IP:8080
