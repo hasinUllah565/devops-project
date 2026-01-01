@@ -116,14 +116,20 @@ _____________________________
 ![app.py ](images/7.png)
 ---->
 
-`from flask import Flask
+``
+
+from flask import Flask
+
 app = Flask(__name__)
 
 @app.route("/")
 def home():
     return "DevOps Project Deployed Successfully!"
 
-app.run(host="0.0.0.0", port=80)`
+app.run(host="0.0.0.0", port=5000)
+
+
+``
 
 ----->
 
@@ -140,7 +146,7 @@ CMD ["python", "app.py"]
 
 1.`docker build -t devops-app .`
 
-2.`docker run -d -p 80:80 devops-app`
+2.`docker run -d -p 5000:5000 devops-app`
 #check from browser
 http://localhost
 
