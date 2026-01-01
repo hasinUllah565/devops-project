@@ -9,8 +9,12 @@
 
 --------------------------------------------
 # Inastall docker and git
-`sudo apt update
-`sudo apt install -y git docker.io`
+```
+
+sudo apt update
+sudo apt install -y git docker.io
+
+```
 ___________________________________
 
 ## What is terrafrom ?
@@ -25,10 +29,14 @@ terafrom file extensio is "`.tf`"
 #1:Add HashiCorp GPG key
 This ensures that the packages are trusted and verified.
 	
-`wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg`
+```
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+```
 
 #2:Add HashiCorp repository
-`echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list`
+```
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+```
 
 #3:Update and install Terraform
 `sudo apt update && sudo apt install terraform`
@@ -148,7 +156,7 @@ app.run(host="0.0.0.0", port=5000)
 
 ![Dockerfile](images/8.png)
 
-``
+```
 FROM python:3.9
 
 WORKDIR /app
@@ -159,7 +167,8 @@ RUN pip install flask
 
 CMD ["python", "app.py"]
 
-``
+```
+
 ##Test Docker Locally
 
 1.`docker build -t devops-app .`
