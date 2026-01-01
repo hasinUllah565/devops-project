@@ -303,6 +303,9 @@ pipeline {
 #after buidling your pipline it  `clone github code`-->`docker login`-->`docker build`-->`deploy app`-->`push to docker hub`
 ![pipeline build](images/19.png)
 
+
+# "Flask app successfully deployed on aws ec2 machine "
+![app deployed](images/20.png)
 _________________________________
 
 Terraform creates AWS EC2
