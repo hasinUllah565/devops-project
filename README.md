@@ -65,20 +65,21 @@ cofigure terrafrom files
 
 --->
 `sudo vim provider.tf`
+`
 provider "aws" {
   region = "us-east-1"
 }
-
+`
 --->
 `sudo vim variables.tf`
-variable "instance_type" {
+`variable "instance_type" {
   default = "t3.micro"
 }
-
-variable "root_volume_size" {
+`
+`variable "root_volume_size" {
   default = 20
 }
-
+`
 
 
 --->
@@ -88,6 +89,7 @@ variable "root_volume_size" {
 
 --->
 `sudo vim main.tf`
+`
 resource "aws_security_group" "my_sg" {
   name = "web-sg"
 
@@ -112,7 +114,8 @@ resource "aws_security_group" "my_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
+`
+`
 resource "aws_instance" "web" {
   ami                    = "ami-0c02fb55956c7d316"
   instance_type          = var.instance_type
@@ -127,29 +130,30 @@ root_block_device {
     Name = "DevOps-EC2"
   }
 }
-
+`
 
 
 after creting this you need to run these commands 
 
 
-1.`terraform init`
+# 1.`terraform init`
 ![terraform-init](images/13.png)
 
-2.`terraform plan`
+# 2.`terraform plan`
 ![terraform-plan](images/14.png)
 
-3.`terraform apply`
+# 3.`terraform apply`
 ![terraform-apply](images/15.png)
 ![aws-ec2](images/16.png)
 
 _____________________________
 
-# step 4: creat app.py file and Docker file
+#  step 4: creat app.py file and Docker file
 
 ![app.py Dockerfile](images/6.png)
 ![app.py ](images/7.png)
 ---->
+
 `from flask import Flask
 app = Flask(__name__)
 
@@ -158,20 +162,23 @@ def home():
     return "DevOps Project Deployed Successfully!"
 
 app.run(host="0.0.0.0", port=80)`
+
 ----->
 
 `sudo vim Dockerfile'
 ![Dockerfile](images/8.png)
+`
 FROM python:3.9
 WORKDIR /app
 COPY app.py .
 RUN pip install flask
 CMD ["python", "app.py"]
-
+`
 ##Test Docker Locally
 
-`docker build -t devops-app .`
-`docker run -d -p 80:80 devops-app`
+1.`docker build -t devops-app .`
+
+2.`docker run -d -p 80:80 devops-app`
 #check from browser
 http://localhost
 
@@ -179,6 +186,7 @@ _______________
 
 # create docker-compose.yml file
 cat docker-compose.yml 
+`
 services:
   flask-app:
     build: .
@@ -186,16 +194,17 @@ services:
     ports:
       - "5000:5000"
     restart: always
+`
 _______________________________
 
-`sudo cd ..`
-`sudo git init`
-`sudo git add .`
-`sudo git commit -m "Initial DevOps project"`
-`sudo git branch -M main`
-`sudo git remote add origin https://github.com/hasinUllah565/devops-project.git`
-`git remote -v`
-`sudo git push -u origin main`
+1.`sudo cd ..`
+2.`sudo git init`
+3.`sudo git add .`
+4.`sudo git commit -m "Initial DevOps project"`
+5.`sudo git branch -M main`
+6.`sudo git remote add origin https://github.com/hasinUllah565/devops-project.git`
+7.`git remote -v`
+8.`sudo git push -u origin main`
 ![push-code-to-dockerhub](images/9.png)
 
 ![push-code-to-dockerhub](images/10.png)
@@ -203,18 +212,19 @@ _________________________________
 
 # PART 5: JENKINS (CI/CD)
 #connect your machine using ssh with your local
-`ssh -i "jenkin1-key.pem" ubuntu@ec2IP`
+
+# `ssh -i "jenkin1-key.pem" ubuntu@ec2IP`
 ![ssh-connect](images/17.png)
 
 ##Install Jenkins on EC2 or local VM
 
-`sudo apt install -y openjdk-11-jdk`
-`wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+1.`sudo apt install -y openjdk-11-jdk`
+2.`wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
 `
-wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -`
+3.wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -`
 `sudo apt update`
 
-`sudo apt install jenkins -y`
+4.`sudo apt install jenkins -y`
 
 ![jenkins-installation](images/11.png)
 
@@ -224,6 +234,7 @@ wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key 
 
 #  Jenkinsfile (PIPELINE)
 # cat jenkinsfile 
+`
 pipeline {
     agent any
 
@@ -273,7 +284,7 @@ pipeline {
         }
     }
 }
-
+`
 #click on build to build your pipline 
 #after buidling your pipline it  `clone github code`-->`docker login`-->`docker build`-->`deploy app`-->`push to docker hub`
 ![pipeline build](images/19.png)
