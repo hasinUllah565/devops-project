@@ -150,9 +150,13 @@ app.run(host="0.0.0.0", port=5000)
 
 ``
 FROM python:3.9
+
 WORKDIR /app
+
 COPY app.py .
+
 RUN pip install flask
+
 CMD ["python", "app.py"]
 
 ``
@@ -170,15 +174,23 @@ _______________
 
 # create docker-compose.yml file
 cat docker-compose.yml 
-`
+
+```
 services:
+
   flask-app:
+  
     build: .
+	
     container_name: flask_app
+	
     ports:
+	
       - "5000:5000"
+	  
     restart: always
-`
+	
+``
 _______________________________
 
 1.`sudo cd ..`
