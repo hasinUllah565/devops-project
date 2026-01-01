@@ -70,8 +70,9 @@ cofigure terrafrom files
 --->
 `sudo vim provider.tf`
 
-``
+`
 provider "aws" {
+
   region = "us-east-1"
 }
 
@@ -79,8 +80,9 @@ provider "aws" {
 --->
 `sudo vim variables.tf`
 
-``
+`
 variable "instance_type" {
+
   default = "t3.micro"
 }
 
@@ -88,6 +90,7 @@ variable "instance_type" {
 
 `
 variable "root_volume_size" {
+
   default = 20
 }
 
@@ -95,12 +98,12 @@ variable "root_volume_size" {
 
 
 --->
-2.`sudo vim main.tf`
+2.# `sudo vim main.tf`
 
 ![configure_terrafom](images/5.png)
 
 --->
-`sudo vim main.tf`
+3.# `sudo vim main.tf`
 ![main.tf file](images/21.png)
 
 after creting this you need to run these commands 
@@ -141,21 +144,26 @@ app.run(host="0.0.0.0", port=5000)
 
 ----->
 
-`sudo vim Dockerfile'
+1.`sudo vim Dockerfile'
+
 ![Dockerfile](images/8.png)
-`
+
+``
 FROM python:3.9
 WORKDIR /app
 COPY app.py .
 RUN pip install flask
 CMD ["python", "app.py"]
-`
+
+``
 ##Test Docker Locally
 
 1.`docker build -t devops-app .`
 
 2.`docker run -d -p 5000:5000 devops-app`
+
 #check from browser
+
 http://localhost
 
 _______________
