@@ -81,34 +81,33 @@ cofigure terrafrom files
 `sudo cd terraform`
 
 --->
-`sudo vim provider.tf`
-
 `
+sudo vim provider.tf
+`
+
+```
 provider "aws" {
 
   region = "us-east-1"
 }
 
-``
+```
 --->
-`sudo vim variables.tf`
-
 `
+sudo vim variables.tf`
+`
+```
 variable "instance_type" {
 
   default = "t3.micro"
 }
 
-``
 
-`
 variable "root_volume_size" {
 
   default = 20
 }
-
-`
-
+```
 
 --->
 2.# `sudo vim main.tf`
