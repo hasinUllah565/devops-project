@@ -225,8 +225,8 @@ _________________________________
 `sudo apt update`
 
 4.`sudo apt install jenkins -y`
+[Jenkins Installation Guide](https://www.jenkins.io/doc/book/installing/linux/)
 
-![jenkins-installation](images/11.png)
 
 ##http://EC2-IP:8080
 
