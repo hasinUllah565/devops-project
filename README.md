@@ -190,7 +190,7 @@ services:
 	  
     restart: always
 	
-``
+```
 _______________________________
 
 1.`sudo cd ..`
@@ -238,7 +238,7 @@ Jenkins `Dashboard` → `Manage Jenkins` → `Credentials` → (choose domain) �
 
 # cat jenkinsfile 
 
-``
+```
 pipeline {
     agent any
 
@@ -290,7 +290,7 @@ pipeline {
 }
 
 
-``
+```
 #click on build to build your pipline 
 #after buidling your pipline it  `clone github code`-->`docker login`-->`docker build`-->`deploy app`-->`push to docker hub`
 ![pipeline build](images/19.png)
