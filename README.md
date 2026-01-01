@@ -19,6 +19,9 @@ Terraform is a DevOps tool that allows you to create, manage, and update cloud i
 terafrom file extensio is "`.tf`"
 
 # Step 1: How to install terrafrom 
+
+# [Terraform Installation Guide](https://developer.hashicorp.com/terraform/downloads)
+
 #1:Add HashiCorp GPG key
 This ensures that the packages are trusted and verified.
 	
@@ -59,6 +62,7 @@ __________________________________
 
 # Step 4: 
 cofigure terrafrom files
+
 
 --->
 `sudo cd terraform`
@@ -225,7 +229,8 @@ _________________________________
 `sudo apt update`
 
 4.`sudo apt install jenkins -y`
-[Jenkins Installation Guide](https://www.jenkins.io/doc/book/installing/linux/)
+
+5.[Jenkins Installation Guide](https://www.jenkins.io/doc/book/installing/linux/)
 
 
 ##http://EC2-IP:8080
@@ -233,8 +238,13 @@ _________________________________
 ![welcom-jenkins](images/12.png)
 
 #  Jenkinsfile (PIPELINE)
+# In this pipeline, we use variables for security purposes
+
+Jenkins `Dashboard` → `Manage Jenkins` → `Credentials` → (choose domain) → `Add Credentials` → Select type (e.g., Username with password or Secret text) → Enter ID (e.g., `dockerhub`) → Enter `secret` → `Save`
+
 # cat jenkinsfile 
-`
+
+``
 pipeline {
     agent any
 
@@ -284,7 +294,9 @@ pipeline {
         }
     }
 }
-`
+
+
+``
 #click on build to build your pipline 
 #after buidling your pipline it  `clone github code`-->`docker login`-->`docker build`-->`deploy app`-->`push to docker hub`
 ![pipeline build](images/19.png)
